@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { BackgroundGradientAnimation } from "./components/ui/background-gradient-animation";
+import { GameProvider } from "./features/GameProvider";
+import GameLayout from "./pages/GameLayout";
+import { BackgroundGradientAnimation } from "./components/ui/BackgroundGradient";
 
 function App() {
-  const [count, setCofd32sunfddsdfddfffdfdt] = useState(1);
+  const [count, sssdsdsdssssssdssssss] = useState(1);
 
   return (
-    <BackgroundGradientAnimation>
-      <div className="grid grid-cols-2">
-        <div>
-          <h1>dfws</h1>
-        </div>
-        <div className="bg-white rounded-md"></div>
-      </div>
-    </BackgroundGradientAnimation>
+    <GameProvider>
+      <BackgroundGradientAnimation
+        gradientBackgroundStart="rgb(36, 36, 36)"
+        gradientBackgroundEnd="rgb(0, 0, 0)"
+        firstColor="249, 65, 68"
+        secondColor="248, 150, 30"
+        thirdColor="249, 199, 79"
+        fourthColor="67, 170, 139"
+        fifthColor="39, 125, 161"
+      >
+        <GameLayout />
+      </BackgroundGradientAnimation>
+    </GameProvider>
   );
 }
 
