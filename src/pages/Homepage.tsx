@@ -1,8 +1,8 @@
-import { useGameContext } from "../features/GameProvider";
 import AppContainer from "../components/ui/AppContainer";
+import { useGameContext } from "../features/GameProvider";
 
 function Homepage() {
-  const { setGameState } = useGameContext();
+  const { state, dispatch } = useGameContext();
 
   return (
     <>
@@ -20,7 +20,9 @@ function Homepage() {
           </p>
           <div className="flex flex-row gap-3 items-center justify-center my-8">
             <button
-              onClick={() => setGameState("GameStart")}
+              onClick={() => {
+                dispatch({ type: "START_GAME" });
+              }}
               className="rounded-full backdrop-blur-2xl bg-white/20 text-2xl font-bold"
             >
               Start Game

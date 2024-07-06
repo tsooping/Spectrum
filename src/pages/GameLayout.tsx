@@ -4,13 +4,13 @@ import Homepage from "./Homepage";
 import ScorePage from "./ScorePage";
 
 function GameLayout() {
-  const { gameState } = useGameContext();
+  const { state } = useGameContext();
 
-  if (gameState === "Homepage") {
+  if (state.status === "Homepage") {
     return <Homepage />;
-  } else if (gameState === "GameStart") {
+  } else if (state.status === "GameStart") {
     return <GamePage />;
-  } else if (gameState === "GameEnd") {
+  } else if (state.status === "GameEnd") {
     return <ScorePage />;
   }
 }

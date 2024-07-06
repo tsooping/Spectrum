@@ -1,19 +1,16 @@
-import { useRef } from "react";
 import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
-import { motion } from "framer-motion";
-import { GameCard } from "../components/ui/GameCard";
 import { GlareCard } from "../components/ui/GlareCard";
 import Button from "../components/ui/Button";
 
 function GamePage() {
-  const { setGameState } = useGameContext();
+  const { state, dispatch } = useGameContext();
 
   return (
     <AppContainer className="bg-black/30">
       <a
         onClick={() => {
-          setGameState("Homepage");
+          dispatch({ type: "HOME" });
         }}
         className="absolute top-5 left-5 font-thin text-3xl text-white hover:text-white/80 transition-all ease-in-out cursor-pointer"
       >
@@ -46,10 +43,9 @@ function GamePage() {
         </div>
         <div className="w-full flex justify-center items-center">
           <div className="bg-black/60 absolute rounded-full flex justify-center items-center p-3 gap-5 bottom-8 ">
-            <Button>Peek</Button>
-            <Button>Submit Answer</Button>
+            <Button>Peek Answer</Button>
             <Button>Shuffle Cards</Button>
-            <Button>Score: 100pt</Button>
+            <Button>Submit Selection</Button>
           </div>
         </div>
       </div>

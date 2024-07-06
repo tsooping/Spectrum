@@ -73,6 +73,8 @@ button:focus-visible {
   }
 }
 
+/* Slider CSS */
+
 .slider {
   -webkit-appearance: none; /* Override default CSS styles */
   appearance: none;
