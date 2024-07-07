@@ -7,22 +7,28 @@ import React, {
 } from "react";
 import { gameCards } from "../data/cards";
 
-type Status =
-  | "Homepage"
-  | "Active"
-  | "Finished"
-  | "NextRound"
-  | "Shuffling"
-  | "Errors";
+// type Status =
+//   | "Homepage"
+//   | "Active"
+//   | "Finished"
+//   | "NextRound"
+//   | "Shuffling"
+//   | "Errors";
 
 type GameState = {
   status: string;
   cards: { left: string; right: string };
   round: number;
   score: number;
+  points: number;
   selection: number;
   answer: number;
   highScore: number;
+  positions: {
+    outerPosition: number;
+    middlePosition: number;
+    innerPosition: number;
+  };
 };
 
 type Action =
@@ -39,36 +45,64 @@ const initialState = {
   cards: { left: "empty", right: "empty" },
   round: 1,
   score: 0,
-  selection: 51,
+  points: 0,
+  selection: 50,
   answer: 0,
   highScore: 0,
+  positions: {
+    outerPosition: 43,
+    middlePosition: 46,
+    innerPosition: 49,
+  },
 };
 
-const calculateScore = (selection: number, answer: number): number => {
-  // Calculate the distance between the selection and the answer
-  const distance = Math.abs(selection - answer);
+const calculateScore = (answer: number, selection: number): number => {
+  const difference = Math.abs(answer - selection);
 
-  // Calculate the score based on the distance with exponential decay
-  // The closer the selection to the answer, the higher the score
-  const maxScore = 100;
-  const score = Math.floor(maxScore * Math.exp(-distance / 10));
-
-  // Ensure the score is non-negative
-  return Math.max(score, 0);
+  if (difference <= 1) {
+    console.log("4 points");
+    return 4;
+  } else if (difference <= 4) {
+    console.log("3 points");
+    return 3;
+  } else if (difference <= 7) {
+    console.log("2 points");
+    return 2;
+  } else {
+    return 0;
+  }
 };
-
-export default calculateScore;
 
 function reducer(state: GameState, action: Action) {
+  let answerValue = Math.floor(Math.random() * 100);
+
   switch (action.type) {
     case "HOME":
       return { ...initialState };
     case "START_GAME":
       return {
         ...initialState,
-        answer: Math.floor(Math.random() * 100),
+        answer: answerValue,
         cards: gameCards[Math.floor(Math.random() * gameCards.length)],
+        positions: {
+          outerPosition: answerValue - 7,
+          middlePosition: answerValue - 4,
+          innerPosition: answerValue - 1,
+        },
         status: "Active",
+      };
+    case "NEXT_ROUND":
+      answerValue = Math.floor(Math.random() * 100);
+      return {
+        ...state,
+        round: state.round + 1,
+        answer: answerValue,
+        cards: gameCards[Math.floor(Math.random() * gameCards.length)],
+        positions: {
+          outerPosition: answerValue - 7,
+          middlePosition: answerValue - 4,
+          innerPosition: answerValue - 1,
+        },
       };
     case "END_GAME":
       return {
@@ -81,16 +115,22 @@ function reducer(state: GameState, action: Action) {
         cards: gameCards[Math.floor(Math.random() * gameCards.length)],
       };
     case "UPDATE_RANGE":
+      answerValue = Math.floor(Math.random() * 100);
       return {
         ...state,
-        answer: Math.floor(Math.random() * 100),
+        answer: answerValue,
+        positions: {
+          outerPosition: answerValue - 7,
+          middlePosition: answerValue - 4,
+          innerPosition: answerValue - 1,
+        },
       };
     case "SUBMIT_ANSWER":
       const finalScore = calculateScore(state.answer, action.payload);
       return {
         ...state,
+        points: finalScore,
         score: (state.score += finalScore),
-        round: state.round + 1,
       };
     default:
       return state;

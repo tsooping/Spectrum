@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GameProvider } from "./features/GameProvider";
 import GameLayout from "./pages/GameLayout";
 import { BackgroundGradientAnimation } from "./components/ui/BackgroundGradient";
+import Slider from "./components/ui/Testing";
 
 function App() {
   const [count, sssdsdsdssssssdssssss] = useState(1);
