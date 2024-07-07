@@ -5,12 +5,13 @@ import ScorePage from "./ScorePage";
 
 function GameLayout() {
   const { state } = useGameContext();
+  const { status, cards, round, score, selection, answer, highScore } = state;
 
-  if (state.status === "Homepage") {
+  if (status === "Homepage") {
     return <Homepage />;
-  } else if (state.status === "GameStart") {
+  } else if (status === "Active") {
     return <GamePage />;
-  } else if (state.status === "GameEnd") {
+  } else if (status === "Finished") {
     return <ScorePage />;
   }
 }

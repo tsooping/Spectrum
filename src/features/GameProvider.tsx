@@ -4,12 +4,18 @@ import React, {
   ReactNode,
   useContext,
   useReducer,
-  useState,
 } from "react";
+import { gameCards } from "../data/cards";
 
-type GameState = "Homepage" | "GameStart" | "GameEnd";
+type Status =
+  | "Homepage"
+  | "Active"
+  | "Finished"
+  | "NextRound"
+  | "Shuffling"
+  | "Errors";
 
-type GameState2 = {
+type GameState = {
   status: string;
   cards: { left: string; right: string };
   round: number;
@@ -22,45 +28,67 @@ type GameState2 = {
 type Action =
   | { type: "HOME" }
   | { type: "START_GAME" }
+  | { type: "END_GAME" }
   | { type: "NEXT_ROUND" }
-  | { type: "PEEK_CARDS" }
   | { type: "SHUFFLE_CARDS" }
-  | { type: "RESTART" }
-  | { type: "UPDATE_SCORE"; payload: number };
+  | { type: "UPDATE_RANGE" }
+  | { type: "SUBMIT_ANSWER"; payload: number };
 
 const initialState = {
   status: "Homepage",
   cards: { left: "empty", right: "empty" },
   round: 1,
   score: 0,
-  selection: 50,
+  selection: 51,
   answer: 0,
   highScore: 0,
 };
 
-function reducer(state: GameState2, action: Action) {
+function reducer(state: GameState, action: Action) {
   switch (action.type) {
     case "HOME":
       return { ...initialState };
     case "START_GAME":
       return {
         ...initialState,
-        status: "GameStart",
+        answer: Math.floor(Math.random() * 100),
+        cards: gameCards[Math.floor(Math.random() * gameCards.length)],
+        status: "Active",
+      };
+    case "END_GAME":
+      return {
+        ...state,
+        status: "Finished",
+      };
+    case "SHUFFLE_CARDS":
+      return {
+        ...state,
+        cards: gameCards[Math.floor(Math.random() * gameCards.length)],
+      };
+    case "UPDATE_RANGE":
+      return {
+        ...state,
+        answer: Math.floor(Math.random() * 100),
+      };
+    case "SUBMIT_ANSWER":
+      return {
+        ...state,
+        status: "Active",
+        round: state.round + 1,
       };
     default:
       return state;
   }
 }
 
-interface GameContextType {
-  gameState: GameState;
-  setGameState: (state: GameState) => void;
-}
+// interface GameContextType {
+//   gameState: GameState;
+//   setGameState: (state: GameState) => void;
+// }
 
 export const GameContext = createContext<
-  { state: GameState2; dispatch: Dispatch<Action> } | undefined
+  { state: GameState; dispatch: Dispatch<Action> } | undefined
 >(undefined);
-// const GameContext = createContext<GameContextType | undefined>(undefined);
 
 interface GameProviderProps {
   children: ReactNode;

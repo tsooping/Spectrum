@@ -11,7 +11,7 @@ function Homepage() {
           tsooping.
         </p>
         <div className="flex flex-col">
-          <h1 className="bg-clip-text text-white drop-shadow-2xl bg-gradient-to-b from-white/90 to-black/10 font-thin pointer-events-none">
+          <h1 className="bg-clip-text text-white drop-shadow-2xl bg-gradient-to-b from-white/90 to-black/10 font-thin pointer-events-none tracking-wider">
             Spectrum
           </h1>
           <p className="font-extralight text-4xl transition-all ease-in-out">
