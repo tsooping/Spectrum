@@ -44,6 +44,21 @@ const initialState = {
   highScore: 0,
 };
 
+const calculateScore = (selection: number, answer: number): number => {
+  // Calculate the distance between the selection and the answer
+  const distance = Math.abs(selection - answer);
+
+  // Calculate the score based on the distance with exponential decay
+  // The closer the selection to the answer, the higher the score
+  const maxScore = 100;
+  const score = Math.floor(maxScore * Math.exp(-distance / 10));
+
+  // Ensure the score is non-negative
+  return Math.max(score, 0);
+};
+
+export default calculateScore;
+
 function reducer(state: GameState, action: Action) {
   switch (action.type) {
     case "HOME":
@@ -71,20 +86,16 @@ function reducer(state: GameState, action: Action) {
         answer: Math.floor(Math.random() * 100),
       };
     case "SUBMIT_ANSWER":
+      const finalScore = calculateScore(state.answer, action.payload);
       return {
         ...state,
-        status: "Active",
+        score: (state.score += finalScore),
         round: state.round + 1,
       };
     default:
       return state;
   }
 }
-
-// interface GameContextType {
-//   gameState: GameState;
-//   setGameState: (state: GameState) => void;
-// }
 
 export const GameContext = createContext<
   { state: GameState; dispatch: Dispatch<Action> } | undefined

@@ -45,9 +45,16 @@ function GamePage() {
       >
         Spectrum
       </a>
+      <a className="absolute top-5 right-5 font-thin text-3xl text-white transition-all ease-in-out hover:text-white">
+        High Score: {highScore}
+        Answer: {answer}
+        Selection: {sliderSelection}
+      </a>
       <div className="flex flex-col gap-5 w-[70rem]">
-        <h2 className="font-thin text-4xl">Round {round}/6</h2>
-        <span className="font-light text-base">{sliderSelection}</span>
+        <div className="flex flex-row justify-between mb-3">
+          <h2 className="font-thin text-4xl">Round {round}/6</h2>
+          <h2 className="font-thin text-4xl">Score: {score}</h2>
+        </div>
         <div className="relative w-full backdrop-blur-2xl bg-white/20 rounded-3xl flex items-center justify-center h-[10rem] overflow-hidden shadow-3xl">
           <input
             className={`answer-slider w-full ${isPeeking ? "block" : "hidden"}`}
@@ -91,7 +98,7 @@ function GamePage() {
           </div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <div className="bg-black/60 absolute rounded-full flex justify-center items-center p-3 gap-5 bottom-8 ">
+          <div className="bg-black/60 absolute rounded-full flex justify-center items-center p-3 gap-5 bottom-8 flex-1">
             <Button
               onMouseDown={startPeeking}
               onMouseUp={stopPeeking}
