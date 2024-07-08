@@ -10,7 +10,7 @@ function Button({ children, className, ...rest }: ButtonProps) {
   return (
     <button
       className={cn(
-        "rounded-full bg-white/10 text-2xl font-bold backdrop-blur-2xl xl:text-lg",
+        "rounded-full bg-white/10 text-lg font-bold backdrop-blur-2xl sm:text-base xl:text-lg",
         className,
       )}
       {...rest} // Spread all other props to the button element

@@ -11,8 +11,8 @@ function AppContainer({
   return (
     <div
       className={cn(
-        "absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 text-3xl text-center md:text-4xl lg:text-7xl",
-        className
+        "absolute inset-0 z-50 flex items-center justify-center px-4 text-center text-3xl font-bold text-white md:text-4xl lg:text-7xl",
+        className,
       )}
     >
       {children}

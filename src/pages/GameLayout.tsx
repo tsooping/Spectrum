@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGameContext } from "../features/GameProvider";
 import GamePage from "./GamePage";
@@ -43,7 +42,7 @@ function GameLayout() {
     <AnimatePresence mode="wait">
       {status === "Homepage" && (
         <motion.div
-          className="absolute z-50 w-full h-screen"
+          className="absolute z-50 h-screen w-full"
           key="Homepage"
           initial="initial"
           animate="animate"
@@ -55,7 +54,7 @@ function GameLayout() {
       )}
       {status === "Active" && (
         <motion.div
-          className="absolute z-50 w-full h-screen"
+          className="absolute z-50 h-screen w-full"
           key="GamePage"
           initial="initial"
           animate="animate"
@@ -67,7 +66,7 @@ function GameLayout() {
       )}
       {status === "Finished" && (
         <motion.div
-          className="absolute z-50 w-full h-screen"
+          className="absolute z-50 h-screen w-full"
           key="ScorePage"
           initial="initial"
           animate="animate"
