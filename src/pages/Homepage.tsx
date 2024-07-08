@@ -1,8 +1,9 @@
+import { useState } from "react";
 import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
-
 function Homepage() {
   const { state, dispatch } = useGameContext();
+  const [isAnimating, setIsAnimating] = useState(false);
 
   return (
     <>
@@ -21,6 +22,7 @@ function Homepage() {
           <div className="flex flex-row gap-3 items-center justify-center my-8">
             <button
               onClick={() => {
+                setIsAnimating(true);
                 dispatch({ type: "START_GAME" });
               }}
               className="rounded-full backdrop-blur-2xl bg-white/20 text-2xl font-bold"

@@ -1,8 +1,26 @@
+// Transition Animations
+const HomepageVariant = {
+  initial: {
+    filter: "blur(0px)",
+    opacity: 1,
+  },
+  animate: {
+    filter: "blur(64px)",
+    opacity: 0,
+    transition: {
+      duration: 2,
+    },
+  },
+  exit: {
+    filter: "blur(64px)",
+    opacity: 0,
+    transition: {
+      duration: 2,
+    },
+  },
+};
+
 // Card Animation
-
-import { color } from "framer-motion";
-import { BackgroundGradientAnimation } from "../components/ui/BackgroundGradient";
-
 export const LeftCardVariant = {
   hidden: {
     opacity: 0,
