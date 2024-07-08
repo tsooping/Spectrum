@@ -130,7 +130,7 @@ function reducer(state: GameState, action: Action) {
       return {
         ...state,
         points: finalScore,
-        score: (state.score += finalScore),
+        score: (state.score += finalScore / 2),
       };
     default:
       return state;

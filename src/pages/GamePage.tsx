@@ -2,10 +2,15 @@ import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
 import { GlareCard } from "../components/ui/GlareCard";
 import Button from "../components/ui/Button";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { LeftCardVariant, RightCardVariant } from "../data/animations";
+import {
+  LeftCardVariant,
+  RightCardVariant,
+  sliderVariants,
+} from "../data/animations";
 import { cardColours } from "../data/cards";
+import { getRandomColor } from "../utils/helpers";
 
 function GamePage() {
   const { state, dispatch } = useGameContext();
@@ -23,10 +28,6 @@ function GamePage() {
   const { outerPosition, middlePosition, innerPosition } = positions;
   const { left: leftCard, right: rightCard } = cards;
 
-  let { from: leftFromColour, to: leftToColour } =
-    cardColours[Math.floor(Math.random() * cardColours.length)];
-  let { from: rightFromColour, to: rightToColour } =
-    cardColours[Math.floor(Math.random() * cardColours.length)];
   // Other Game State
   const [sliderSelection, setSliderSelection] = useState<number>(selection);
   const [isPeeking, setIsPeeking] = useState<boolean>(false);
@@ -34,6 +35,13 @@ function GamePage() {
 
   // Animation States
   const [isShuffling, setIsShuffling] = useState(false);
+  const [isRandomising, setIsRandomising] = useState(false);
+  const [leftCardColor, setLeftCardColor] = useState(getRandomColor);
+  const [rightCardColor, setRightCardColor] = useState(getRandomColor);
+
+  // Setting Colour
+  const { from: leftFromColour, to: leftToColour } = leftCardColor;
+  const { from: rightFromColour, to: rightToColour } = rightCardColor;
 
   // Button Handlers
   function handleSubmit() {
@@ -43,14 +51,21 @@ function GamePage() {
 
   function handleShuffle() {
     setIsShuffling(true);
+
     setTimeout(() => {
       dispatch({ type: "SHUFFLE_CARDS" });
+      setLeftCardColor(getRandomColor());
+      setRightCardColor(getRandomColor());
       setIsShuffling(false);
     }, 500);
   }
 
   function handleRange() {
-    dispatch({ type: "UPDATE_RANGE" });
+    setIsRandomising(true);
+    setTimeout(() => {
+      dispatch({ type: "UPDATE_RANGE" });
+      setIsRandomising(false);
+    }, 200);
   }
 
   function handleNextRound() {
@@ -97,7 +112,12 @@ function GamePage() {
           </h2>
           <h2 className="font-thin text-4xl">Score: {score}</h2>
         </div>
-        <div className="relative w-full backdrop-blur-2xl bg-white/20 rounded-3xl flex items-center justify-center h-[10rem] overflow-hidden shadow-3xl">
+        <motion.div
+          className="relative w-full backdrop-blur-2xl bg-white/20 rounded-3xl flex items-center justify-center h-[10rem] overflow-hidden shadow-3xl"
+          variants={sliderVariants}
+          initial="default"
+          animate={isRandomising ? "randomiseRange" : "default"}
+        >
           <div
             style={{ left: `${outerPosition}%` }}
             className={`absolute w-[15%] h-full bg-green-700 transition-all ease-in-out duration-500 ${
@@ -132,7 +152,7 @@ function GamePage() {
               }}
             />
           </div>
-        </div>
+        </motion.div>
         <p className="font-thin text-xl my-2">
           Slide the slider to the left or right based on your hint!
         </p>
@@ -192,14 +212,6 @@ function GamePage() {
           </div>
         </div>
       </div>
-      {/* <input
-            className={`answer-slider w-full ${isPeeking ? "block" : "hidden"}`}
-            type="range"
-            min="1"
-            max="100"
-            value={answer}
-            readOnly
-          /> */}
     </AppContainer>
   );
 }
