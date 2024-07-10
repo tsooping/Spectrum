@@ -48,13 +48,17 @@ const initialState = {
   points: 0,
   selection: 50,
   answer: 0,
-  highScore: 0,
+  highScore: parseInt(localStorage.getItem("high-score") || "0", 10),
   positions: {
     outerPosition: 43,
     middlePosition: 46,
     innerPosition: 49,
   },
 };
+
+function updateHighScore() {
+  return parseInt(localStorage.getItem("high-score") || "0", 10);
+}
 
 const calculateScore = (answer: number, selection: number): number => {
   const difference = Math.abs(answer - selection);
@@ -78,10 +82,14 @@ function reducer(state: GameState, action: Action) {
 
   switch (action.type) {
     case "HOME":
-      return { ...initialState };
+      return {
+        ...initialState,
+        highScore: updateHighScore(),
+      };
     case "START_GAME":
       return {
         ...initialState,
+        highScore: updateHighScore(),
         answer: answerValue,
         cards: gameCards[Math.floor(Math.random() * gameCards.length)],
         positions: {
@@ -107,7 +115,7 @@ function reducer(state: GameState, action: Action) {
     case "END_GAME":
       return {
         ...state,
-        status: "Finished",
+        status: "Homepage",
       };
     case "SHUFFLE_CARDS":
       return {
@@ -127,11 +135,21 @@ function reducer(state: GameState, action: Action) {
       };
     case "SUBMIT_ANSWER":
       const finalScore = calculateScore(state.answer, action.payload);
+      const newScore = state.score + finalScore;
+      const newHighScore =
+        newScore > state.highScore ? newScore : state.highScore;
+
+      if (newScore > state.highScore) {
+        localStorage.setItem("high-score", newScore.toString());
+      }
+
       return {
         ...state,
         points: finalScore,
-        score: (state.score += finalScore / 2),
+        score: newScore,
+        highScore: newHighScore,
       };
+
     default:
       return state;
   }

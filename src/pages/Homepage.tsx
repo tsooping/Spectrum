@@ -1,17 +1,20 @@
-import { useState } from "react";
 import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
 import Button from "../components/ui/Button";
+
 function Homepage() {
   const { state, dispatch } = useGameContext();
-  const [isAnimating, setIsAnimating] = useState(false);
 
   return (
     <>
       <AppContainer>
-        <p className="absolute left-0 top-0 ml-2 mt-2 text-3xl font-thin">
-          tsooping.
-        </p>
+        <div className="absolute top-4 flex w-full flex-row justify-between">
+          <p className="ml-3 text-3xl font-thin">tsooping.</p>
+          <p className="mr-4 text-3xl font-thin text-white transition-all ease-in-out hover:text-white md:block">
+            High Score: {state.highScore}
+          </p>
+        </div>
+
         <div className="flex flex-col gap-5">
           <h1 className="bg-gradient-to-b from-white/90 to-black/10 bg-clip-text text-7xl font-thin tracking-widest text-white drop-shadow-2xl md:text-8xl lg:text-9xl xl:text-[10rem]">
             Spectrum
@@ -23,7 +26,6 @@ function Homepage() {
           <div className="my-4 grid grid-cols-2 items-center justify-center gap-3 sm:mx-9 lg:mx-0">
             <Button
               onClick={() => {
-                setIsAnimating(true);
                 dispatch({ type: "START_GAME" });
               }}
             >

@@ -96,11 +96,11 @@ function GamePage() {
         onClick={() => {
           dispatch({ type: "HOME" });
         }}
-        className="absolute left-5 top-5 hidden cursor-pointer text-3xl font-thin text-white transition-all ease-in-out hover:text-white/80 md:block"
+        className="absolute left-5 top-4 hidden cursor-pointer text-3xl font-thin text-white transition-all ease-in-out hover:text-white/80 md:block"
       >
         Spectrum
       </a>
-      <a className="absolute right-5 top-5 hidden text-3xl font-thin text-white transition-all ease-in-out hover:text-white md:block">
+      <a className="absolute right-5 top-4 hidden text-3xl font-thin text-white transition-all ease-in-out hover:text-white md:block">
         High Score: {highScore}
       </a>
       <div className="rotate-90 scale-[0.5] sm:scale-[0.8] md:rotate-0 md:scale-[1]">
@@ -128,7 +128,7 @@ function GamePage() {
             </h2>
           </div>
           <motion.div
-            className="shadow-3xl relative flex h-[10rem] w-full items-center justify-center overflow-hidden rounded-3xl bg-white/20 backdrop-blur-2xl"
+            className="relative flex h-[10rem] w-full items-center justify-center overflow-hidden rounded-3xl bg-white/10 shadow-md backdrop-blur-2xl"
             variants={sliderVariants}
             initial="default"
             animate={isRandomising ? "randomiseRange" : "default"}
@@ -151,7 +151,9 @@ function GamePage() {
                 isPeeking || isRoundEnd ? "opacity-100" : "opacity-0"
               }`}
             />
-            <div className="absolute w-full bg-white/10">
+            <div
+              className={`absolute w-full bg-white/10 transition-all ease-in-out`}
+            >
               <input
                 className="slider w-full"
                 type="range"
@@ -204,7 +206,7 @@ function GamePage() {
             </div>
           </div>
           <div className="flex w-full items-center justify-center">
-            <div className="absolute bottom-8 block flex flex-1 items-center justify-center gap-5 rounded-full bg-black/60 p-3 md:hidden">
+            <div className="absolute bottom-8 flex flex-1 items-center justify-center gap-5 rounded-full bg-black/60 p-3 md:hidden">
               {!isRoundEnd ? (
                 <>
                   <p className="ml-4 text-2xl font-light md:hidden">
