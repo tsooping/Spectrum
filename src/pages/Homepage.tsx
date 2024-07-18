@@ -1,9 +1,11 @@
 import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
 import Button from "../components/ui/Button";
+import { useState } from "react";
 
 function Homepage() {
   const { state, dispatch } = useGameContext();
+  const [showTutorial, setShowTutorial] = useState(false);
 
   return (
     <>
@@ -31,7 +33,13 @@ function Homepage() {
             >
               Start Game
             </Button>
-            <Button>How To Play?</Button>
+            <Button
+              onClick={() => {
+                setShowTutorial(!showTutorial);
+              }}
+            >
+              How To Play?
+            </Button>
           </div>
         </div>
       </AppContainer>
@@ -48,6 +56,9 @@ function Homepage() {
           </a>
         </p>
       </div>
+      <div
+        className={`absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/30 ${showTutorial ? "opacity-1" : "opacity-0"} transition-all ease-in-out`}
+      ></div>
     </>
   );
 }
