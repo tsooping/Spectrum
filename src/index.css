@@ -144,3 +144,21 @@ button:focus-visible {
   border-radius: 0; /* Remove default rounded corners */
   position: relative; /* Ensure pseudo-elements are positioned relative to the thumb */
 }
+
+/* Scrollbar CSS */
+/* width */
+::-webkit-scrollbar {
+  width: 17px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(220, 220, 220);
+  border-radius: 10px;
+}

@@ -29,10 +29,13 @@ type GameState = {
     middlePosition: number;
     innerPosition: number;
   };
+  tutorial: boolean;
 };
 
 type Action =
   | { type: "HOME" }
+  | { type: "SHOW_TUTORIAL" } // Extra
+  | { type: "CLOSE_TUTORIAL" } // Extra
   | { type: "START_GAME" }
   | { type: "END_GAME" }
   | { type: "NEXT_ROUND" }
@@ -54,6 +57,7 @@ const initialState = {
     middlePosition: 46,
     innerPosition: 49,
   },
+  tutorial: false,
 };
 
 function updateHighScore() {
@@ -85,6 +89,16 @@ function reducer(state: GameState, action: Action) {
       return {
         ...initialState,
         highScore: updateHighScore(),
+      };
+    case "SHOW_TUTORIAL":
+      return {
+        ...initialState,
+        tutorial: true,
+      };
+    case "CLOSE_TUTORIAL":
+      return {
+        ...initialState,
+        tutorial: false,
       };
     case "START_GAME":
       return {

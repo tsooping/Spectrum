@@ -1,11 +1,11 @@
 import AppContainer from "../components/ui/AppContainer";
 import { useGameContext } from "../features/GameProvider";
 import Button from "../components/ui/Button";
-import { useState } from "react";
+import TutorialDialog from "../features/TutorialDialog";
 
 function Homepage() {
   const { state, dispatch } = useGameContext();
-  const [showTutorial, setShowTutorial] = useState(false);
+  const tutorialState = state.tutorial;
 
   return (
     <>
@@ -35,7 +35,7 @@ function Homepage() {
             </Button>
             <Button
               onClick={() => {
-                setShowTutorial(!showTutorial);
+                dispatch({ type: "SHOW_TUTORIAL" });
               }}
             >
               How To Play?
@@ -57,8 +57,10 @@ function Homepage() {
         </p>
       </div>
       <div
-        className={`absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/30 ${showTutorial ? "opacity-1" : "opacity-0"} transition-all ease-in-out`}
-      ></div>
+        className={`absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/50 ${tutorialState ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} z-[50] transition-opacity duration-700 ease-in-out`}
+      >
+        <TutorialDialog />
+      </div>
     </>
   );
 }

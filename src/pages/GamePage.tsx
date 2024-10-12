@@ -50,7 +50,6 @@ function GamePage() {
 
   function handleShuffle() {
     setIsShuffling(true);
-
     setTimeout(() => {
       dispatch({ type: "SHUFFLE_CARDS" });
       setLeftCardColor(getRandomColor());
