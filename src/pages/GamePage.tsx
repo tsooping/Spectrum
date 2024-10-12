@@ -13,17 +13,8 @@ import { getRandomColor } from "../utils/helpers";
 
 function GamePage() {
   const { state, dispatch } = useGameContext();
-  const {
-    status,
-    cards,
-    round,
-    score,
-    points,
-    selection,
-    answer,
-    highScore,
-    positions,
-  } = state;
+  const { cards, round, score, points, selection, highScore, positions } =
+    state;
   const { outerPosition, middlePosition, innerPosition } = positions;
   const { left: leftCard, right: rightCard } = cards;
 
