@@ -6,7 +6,7 @@ function TutorialDialog() {
 
   return (
     <div
-      className={`relative flex max-w-[1000px] flex-col items-center justify-center rounded-2xl bg-[#ffffffff] py-5 pr-3 text-center align-middle text-black`}
+      className={`relative flex max-w-[1200px] flex-col items-center justify-center rounded-2xl bg-[#ffffff] py-5 pr-3 text-center align-middle text-black`}
     >
       <button
         className="absolute right-5 top-5 bg-white"
@@ -26,7 +26,7 @@ function TutorialDialog() {
         <div className="text-center">
           <h3 className="mb-3 text-3xl">Your Team's Goal</h3>
           <img
-            src="src/assets/tutorial-1.png"
+            src="public/tutorial-1.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -38,7 +38,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">The Twist!</h3>
           <img
-            src="src/assets/tutorial-2.png"
+            src="public/tutorial-2.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -50,7 +50,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">How do you find the target?</h3>
           <img
-            src="src/assets/tutorial-3.png"
+            src="public/tutorial-3.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -64,7 +64,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">Try to get the high score!</h3>
           <img
-            src="src/assets/tutorial-4.png"
+            src="public/tutorial-4.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">

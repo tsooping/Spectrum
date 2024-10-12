@@ -11,7 +11,13 @@ function Homepage() {
     <>
       <AppContainer>
         <div className="absolute top-4 flex w-full flex-row justify-between">
-          <p className="ml-3 text-3xl font-thin">tsooping.</p>
+          <a
+            className="ml-3 text-3xl font-thin text-white transition-all duration-500 hover:scale-[1.07] hover:text-white"
+            href="https://tsooping.pages.dev/"
+            target="none"
+          >
+            tsooping.
+          </a>
           <p className="mr-4 text-3xl font-thin text-white transition-all ease-in-out hover:text-white md:block">
             High Score: {state.highScore}
           </p>
@@ -57,7 +63,7 @@ function Homepage() {
         </p>
       </div>
       <div
-        className={`absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/50 ${tutorialState ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} z-[50] transition-opacity duration-700 ease-in-out`}
+        className={`absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/50 ${tutorialState ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"} z-[50] transition-opacity duration-1000 ease-in-out`}
       >
         <TutorialDialog />
       </div>
