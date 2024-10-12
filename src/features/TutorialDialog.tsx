@@ -26,7 +26,7 @@ function TutorialDialog() {
         <div className="text-center">
           <h3 className="mb-3 text-3xl">Your Team's Goal</h3>
           <img
-            src="public/tutorial-1.webp"
+            src="/images/tutorial-1.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -38,7 +38,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">The Twist!</h3>
           <img
-            src="public/tutorial-2.webp"
+            src="/images/tutorial-2.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -50,7 +50,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">How do you find the target?</h3>
           <img
-            src="public/tutorial-3.webp"
+            src="/images/tutorial-3.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
@@ -64,7 +64,7 @@ function TutorialDialog() {
         <div>
           <h3 className="mb-3 text-3xl">Try to get the high score!</h3>
           <img
-            src="public/tutorial-4.webp"
+            src="/images/tutorial-4.webp"
             className="mx-auto mb-3 w-[40rem] rounded-xl"
           />
           <p className="text-xl font-light">
