@@ -1,10 +1,12 @@
 import { GameProvider } from "./features/GameProvider";
 import GameLayout from "./pages/GameLayout";
 import { BackgroundGradientAnimation } from "./components/ui/BackgroundGradient";
+import MobileAlert from "./features/MobileAlert";
 
 function App() {
   return (
     <GameProvider>
+      <MobileAlert />
       <BackgroundGradientAnimation
         gradientBackgroundStart="rgb(36, 36, 36)"
         gradientBackgroundEnd="rgb(0, 0, 0)"
